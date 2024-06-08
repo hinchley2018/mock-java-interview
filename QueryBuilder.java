@@ -21,7 +21,8 @@ public class QueryBuilderExample {
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery<Employee> query = cb.createQuery(Employee.class);
         Root<Employee> root = query.from(Employee.class);
-        query.select(root);
+        query.select(root).where(cb.gt(root.get("salary"), 2000));
+
 
         List<Employee> results = em.createQuery(query).getResultList();
         results.forEach(System.out::println);
